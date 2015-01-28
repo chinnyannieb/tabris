@@ -1,4 +1,3 @@
-#include <stdint-gcc.h>
 #include "vehicle.h"
 
 VehicleWithTwoDrivers::VehicleWithTwoDrivers(uint8_t AIA, uint8_t AIB, uint8_t BIA, uint8_t BIB) : AIA(AIA), AIB(AIB),

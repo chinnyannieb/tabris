@@ -3,9 +3,6 @@
 #include "TimerOne.h"
 #include "vehicle.h"
 
-#define NORMAL_SPEED 128
-#define MIN_DISTANCE 45
-
 Ultrasonic *ultrasonic;
 Vehicle *vehicle;
 float distance = INFINITY_DISTANCE;
@@ -22,9 +19,10 @@ void setup() {
 }
 
 void loop() {
-    vehicle->forward(NORMAL_SPEED);
-    if (distance <= MIN_DISTANCE) {
-        vehicle->backward(NORMAL_SPEED/2);
+    vehicle->forward(255);
+    if (distance < 25) {
+        vehicle->backward(200);
+        delay(100);
         vehicle->turnLeft(45);
     }
 }
