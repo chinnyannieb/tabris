@@ -15,10 +15,20 @@ public:
 
     void updateDistance();
 
+    void stop();
+
+    bool isAutonomus();
+
+    void manual();
+
+    void autonom();
+
+    float getDistance();
 private:
     Ultrasonic *rangesensor;
     Vehicle *vehicle;
     float currentDistance;
+    bool autonomus;
 };
 
 #endif

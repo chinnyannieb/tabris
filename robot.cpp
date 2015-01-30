@@ -2,6 +2,7 @@
 
 Robot::Robot(Ultrasonic *rangesensor, Vehicle *vehicle) : rangesensor(rangesensor), vehicle(vehicle) {
     currentDistance = INFINITY_DISTANCE;
+    autonomus = true;
 }
 
 void Robot::updateDistance() {
@@ -21,4 +22,25 @@ void Robot::moveForward() {
             vehicle->turnRight(45);
         }
     }
+}
+
+void Robot::stop() {
+    vehicle->stop();
+}
+
+bool Robot::isAutonomus() {
+    return autonomus;
+}
+
+void Robot::autonom() {
+    autonomus = true;
+}
+
+void Robot::manual() {
+    autonomus = false;
+    stop();
+}
+
+float Robot::getDistance() {
+    return currentDistance;
 }
