@@ -1,28 +1,24 @@
-#include "Arduino.h"
-#include "ultrasonic.h"
-#include "TimerOne.h"
-#include "vehicle.h"
+#include "robot.h"
 
-Ultrasonic *ultrasonic;
-Vehicle *vehicle;
-float distance = INFINITY_DISTANCE;
-
-void updateDistance() {
-    distance = ultrasonic->measureDistance();
+Robot::Robot(Ultrasonic *rangesensor, Vehicle *vehicle) : rangesensor(rangesensor), vehicle(vehicle) {
+    currentDistance = INFINITY_DISTANCE;
 }
 
-void setup() {
-    ultrasonic = new Ultrasonic(12, 13);
-    vehicle = new VehicleWithTwoDrivers(3, 5, 6, 9);
-    Timer1.initialize(MEASUREMENT_INTERVALS);
-    Timer1.attachInterrupt(updateDistance);
+void Robot::updateDistance() {
+    currentDistance = rangesensor->measureDistance();
 }
 
-void loop() {
+void Robot::moveForward() {
     vehicle->forward(255);
-    if (distance < 25) {
+    if (currentDistance < 25) {
         vehicle->backward(200);
         delay(100);
-        vehicle->turnLeft(45);
+
+        long turnLeftOrRight = random(0, 10);
+        if (turnLeftOrRight <= 5) {
+            vehicle->turnLeft(45);
+        } else {
+            vehicle->turnRight(45);
+        }
     }
 }
