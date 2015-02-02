@@ -12,7 +12,7 @@ void updateDistance() {
 }
 
 void setup() {
-    Ultrasonic *ultrasonic = new Ultrasonic(12, 13);
+    Ultrasonic *ultrasonic = new Ultrasonic(12, 2);
     Vehicle *vehicle = new VehicleWithTwoDrivers(3, 5, 6, 9);
     robot = new Robot(ultrasonic, vehicle);
     control = new Control(7, 8, robot);

@@ -12,6 +12,5 @@ set(${PROJECT_NAME}_SRCS ultrasonic.cpp vehicle.cpp entrypoint.cpp robot.cpp Tim
 # Define the port for uploading code to the Arduino
 set(${PROJECT_NAME}_PORT /dev/ttyACM0)
 
-link_directories(${ARDUINO_SDK}/SoftwareSerial/)
 # Command to generate code arduino firmware (.hex file)
 generate_arduino_firmware(${PROJECT_NAME})

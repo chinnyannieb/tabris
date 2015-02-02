@@ -6,6 +6,7 @@
 #include "TimerOne.h"
 #include "vehicle.h"
 #include "math.h"
+#include "SoftwareSerial.h"
 
 class Robot {
 public:

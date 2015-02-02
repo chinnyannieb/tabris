@@ -3,7 +3,6 @@
 
 #include "Arduino.h"
 #include "robot.h"
-#include "SoftwareSerial/SoftwareSerial.h"
 
 class Control {
 
