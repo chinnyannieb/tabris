@@ -24,12 +24,15 @@ public:
 
     void autonom();
 
-    float getDistance();
 private:
     Ultrasonic *rangesensor;
     Vehicle *vehicle;
     float currentDistance;
     bool autonomus;
+public:
+    Vehicle *getVehicle() const {
+        return vehicle;
+    }
 };
 
 #endif

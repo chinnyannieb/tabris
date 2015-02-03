@@ -40,7 +40,3 @@ void Robot::manual() {
     autonomus = false;
     stop();
 }
-
-float Robot::getDistance() {
-    return currentDistance;
-}
