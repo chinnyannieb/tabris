@@ -4,12 +4,14 @@
 #include "Arduino.h"
 #include "robot.h"
 
+#define SERIAL_TIMEOUT 300
+
 class Control {
 
 public:
     Control(uint8_t rx, uint8_t tx, Robot *robot);
 
-    void changeMode();
+    void changeMode(int command);
 
     void run();
 
@@ -24,6 +26,10 @@ private:
     void stepBackwards();
 
     void delayAndStop(unsigned long delayInterval);
+
+    void reactOnCommand(int command);
+
+    void processCommands();
 };
 
 #endif

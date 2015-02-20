@@ -3,29 +3,22 @@
 Control::Control(uint8_t rx, uint8_t tx, Robot *robot) : robot(robot) {
     controlPort = new SoftwareSerial(rx, tx);
     controlPort->begin(9600);
+    controlPort->setTimeout(SERIAL_TIMEOUT);
 }
 
-void Control::changeMode() {
-    if (controlPort->available()) {
-        int command = controlPort->read();
-        if (command == 'm') {
-            robot->manual();
-            robot->stop();
-            controlPort->println("MANUAL-OK");
-        } else if (command == 'a') {
-            robot->autonom();
-            controlPort->println("AUTO-OK");
-        }
+void Control::changeMode(int command) {
+    if (command == 'm') {
+        robot->manual();
+        robot->stop();
+    } else if (command == 'a') {
+        robot->autonom();
     }
 }
 
 void Control::run() {
-    changeMode();
+    processCommands();
     if (robot->isAutonomus()) {
         robot->moveForward();
-    } else if (controlPort->available()) {
-        int command = controlPort->read();
-        manualDrive(command);
     }
 }
 
@@ -54,4 +47,19 @@ void Control::stepForward() {
 void Control::delayAndStop(unsigned long delayInterval) {
     delay(delayInterval);
     robot->stop();
+}
+
+void Control::reactOnCommand(int command) {
+    if (command == 'm' || command == 'a') {
+        changeMode(command);
+    } else if (!robot->isAutonomus() && (command == 'f' || command == 'b' || command == 'l' || command == 'r')) {
+        manualDrive(command);
+    }
+    controlPort->println("OK");
+}
+
+void Control::processCommands() {
+    while (controlPort->available() > 0) {
+        reactOnCommand(controlPort->read());
+    }
 }
