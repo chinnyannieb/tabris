@@ -33,6 +33,10 @@ public:
     Vehicle *getVehicle() const {
         return vehicle;
     }
+
+    float getCurrentDistance() const {
+        return currentDistance;
+    }
 };
 
 #endif

@@ -54,6 +54,8 @@ void Control::reactOnCommand(int command) {
         changeMode(command);
     } else if (!robot->isAutonomus() && (command == 'f' || command == 'b' || command == 'l' || command == 'r')) {
         manualDrive(command);
+    } else {
+        processMiscCommand(command);
     }
     controlPort->println("OK");
 }
@@ -61,5 +63,11 @@ void Control::reactOnCommand(int command) {
 void Control::processCommands() {
     while (controlPort->available() > 0) {
         reactOnCommand(controlPort->read());
+    }
+}
+
+void Control::processMiscCommand(int command) {
+    if (command == 'd') {
+        controlPort->println(robot->getCurrentDistance());
     }
 }

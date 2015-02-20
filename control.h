@@ -30,6 +30,8 @@ private:
     void reactOnCommand(int command);
 
     void processCommands();
+
+    void processMiscCommand(int command);
 };
 
 #endif
